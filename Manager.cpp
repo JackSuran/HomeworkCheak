@@ -286,6 +286,7 @@ void Manager::load()
         stu.setName(buf[1]);
         stu.setSubmit(atoi(buf[2].c_str()));
         stu.setCalled(atoi(buf[3].c_str()));
+        buf.clear();
 
         this->StdList.insert(make_pair(stu.getNumber(), stu));
     }

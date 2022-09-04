@@ -10,7 +10,7 @@ Manager.o : Manager.cpp Manager.h path.h
 main.o : main.cpp
 	$(CC) $(CFLAGS) main.cpp -c -o main.o
 clean :
-	del *.o *.exe *.csv
+	del *.o *.exe 
 
 all :
 	cls
