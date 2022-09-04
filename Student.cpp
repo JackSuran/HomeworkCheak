@@ -4,7 +4,7 @@
 
 using std::cout, std::cin, std::endl, std::string;
 
-void Student::setInfo(int choose = 1)
+void Student::setInfo(int choose)
 {
     switch (choose)
     {
@@ -36,7 +36,20 @@ void Student::setInfo(int choose = 1)
     }
 }
 
-void Student::showInfo(int flag = 0){
+void Student::setNumber(int number){
+    this->m_Number = number;
+}
+void Student::setName(string name){
+    this->m_Name = name;
+}
+void Student::setSubmit(bool is_submit){
+    this->m_Is_Submit = is_submit;
+}
+void Student::setCalled(bool is_call){
+    this->m_Is_Called = is_call;
+}
+
+void Student::showInfo(int flag){
     cout << "学号：" << this->m_Number
         << " 姓名：" << this->m_Name;
     if(flag == 1){
@@ -60,4 +73,12 @@ bool Student::getSubmit(){
 
 bool Student::getCall(){
     return this->m_Is_Called;
+}
+
+Student::Student():m_Number(0),m_Name("张三"),m_Is_Submit(false),m_Is_Called(false)
+{
+}
+
+Student::~Student()
+{
 }

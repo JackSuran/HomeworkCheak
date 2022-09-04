@@ -1,7 +1,10 @@
 #include "Manager.h"
 #include <iostream>
+#include <vector>
+#include <fstream>
+#include "path.h"
 
-using std::cout, std::cin, std::endl, std::string, std::map, std::pair, std::make_pair;
+using std::cout, std::cin, std::endl, std::string, std::vector, std::map, std::pair, std::make_pair, std::ifstream, std::ofstream, std::ios;
 
 void Manager::addStudent()
 {
@@ -14,7 +17,7 @@ void Manager::addStudent()
     for (int i = 1; i <= stuNumber; ++i)
     {
         cout << "请输入第 " << i << " 名学生的信息" << endl;
-        stu.setInfo();
+        stu.setInfo(1);
         if (this->StdList.find(stuNumber) != this->StdList.end())
         {
             cout << "学号输入重复，重复学号为：" << stuNumber << endl;
@@ -47,10 +50,12 @@ void Manager::changeStudent()
         {
             this->StdList[stuNumber].showInfo(1);
             char choose;
-            cout << "请输入要修改的选项：" << endl
+            cout << endl
                  << "1. 姓名" << endl
                  << "2. 提交状态" << endl
-                 << "3, 提醒状态" << endl;
+                 << "3, 提醒状态" << endl
+                 << "请输入要修改的选项：" << endl;
+            cin >> choose;
             if (choose > '3' || choose < '1')
             {
                 cout << "选项错误" << endl;
@@ -185,7 +190,7 @@ void Manager::showStudent()
     {
         for (map<int, Student>::iterator it = this->StdList.begin(); it != this->StdList.end(); ++it)
         {
-            it->second.setInfo(1);
+            it->second.showInfo(1);
             cout << endl;
         }
     }
@@ -195,7 +200,7 @@ void Manager::showStudent()
         {
             if (!it->second.getSubmit())
             {
-                it->second.setInfo();
+                it->second.showInfo();
                 cout << endl;
             }
         }
@@ -206,7 +211,7 @@ void Manager::showStudent()
         {
             if (it->second.getCall())
             {
-                it->second.setInfo();
+                it->second.showInfo();
                 cout << endl;
             }
         }
@@ -216,6 +221,85 @@ void Manager::showStudent()
         cout << "选项错误" << endl;
         return;
     }
-    cout<<"显示完毕"<<endl;
+    cout << "显示完毕" << endl;
     return;
+}
+
+void Manager::save()
+{
+    ofstream ofs;
+    ofs.open(FILENAME, ios::out | ios::trunc);
+
+    for (map<int, Student>::iterator it = this->StdList.begin(); it != this->StdList.end(); ++it)
+    {
+        ofs << it->first << ","
+            << it->second.getName() << ","
+            << it->second.getSubmit() << ","
+            << it->second.getCall() << "," << endl;
+    }
+    cout << "保存完毕" << endl;
+    ofs.close();
+
+    return;
+}
+
+void Manager::load()
+{
+    ifstream ifs;
+    ifs.open(FILENAME, ios::in);
+    if (!ifs.is_open())
+    {
+        ifs.close();
+        this->save();
+        return;
+    }
+
+    char ch;
+    ifs >> ch;
+    if (ifs.eof())
+    {
+        cout << "数据为空" << endl;
+        ifs.close();
+        return;
+    }
+    ifs.putback(ch);
+
+    string data;
+    vector<string> buf;
+    Student stu;
+
+    while (ifs >> data)
+    {
+        int pos = -1;
+        int start = 0;
+        while (true)
+        {
+            pos = data.find(",", start);
+            if (pos == -1)
+            {
+                break;
+            }
+            buf.push_back(data.substr(start, pos - start));
+            start = pos + 1;
+        }
+        stu.setNumber(atoi(buf[0].c_str()));
+        stu.setName(buf[1]);
+        stu.setSubmit(atoi(buf[2].c_str()));
+        stu.setCalled(atoi(buf[3].c_str()));
+
+        this->StdList.insert(make_pair(stu.getNumber(), stu));
+    }
+    cout << "加载完毕" << endl;
+}
+
+Manager::Manager(/* args */)
+{
+    this->StdList.clear();
+    this->load();
+}
+
+Manager::~Manager()
+{
+    this->save();
+    this->StdList.clear();
 }

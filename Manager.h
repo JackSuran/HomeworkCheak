@@ -33,16 +33,6 @@ public:
     ~Manager();
 };
 
-Manager::Manager(/* args */)
-{
-    this->StdList.clear();
-    this->load();
-}
 
-Manager::~Manager()
-{
-    this->save();
-    this->StdList.clear();
-}
 
 #endif

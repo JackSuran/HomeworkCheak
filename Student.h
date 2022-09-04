@@ -17,6 +17,14 @@ public:
     //设置信息
     void setInfo(int choose = 1);
 
+    void setNumber(int num);
+
+    void setName(std::string name);
+
+    void setSubmit(bool is_submit);
+    
+    void setCalled(bool is_call);
+
     //显示信息
     void showInfo(int flag = 0);
 
@@ -34,13 +42,5 @@ public:
 
     ~Student();
 };
-
-Student::Student():m_Number(0),m_Name("张三"),m_Is_Submit(false),m_Is_Called(false)
-{
-}
-
-Student::~Student()
-{
-}
 
 #endif
