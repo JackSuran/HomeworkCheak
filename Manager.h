@@ -7,7 +7,7 @@
 class Manager
 {
 private:
-    std::map<int,Student> StdList;
+    std::map<int, Student> StdList;
 
 public:
     Manager(/* args */);
@@ -32,7 +32,5 @@ public:
 
     ~Manager();
 };
-
-
 
 #endif

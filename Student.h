@@ -22,7 +22,7 @@ public:
     void setName(std::string name);
 
     void setSubmit(bool is_submit);
-    
+
     void setCalled(bool is_call);
 
     //显示信息

@@ -18,7 +18,7 @@ void Manager::addStudent()
     {
         cout << "请输入第 " << i << " 名学生的信息" << endl;
         stu.setInfo(1);
-        if (this->StdList.find(stuNumber) != this->StdList.end())
+        if (this->StdList.find(stuNumber) == this->StdList.end())
         {
             cout << "学号输入重复，重复学号为：" << stuNumber << endl;
             continue;
@@ -46,7 +46,7 @@ void Manager::changeStudent()
             cout << "错误学号" << endl;
             return;
         }
-        else if (stuNumber > 0 && stuNumber <= 64)
+        else if (stuNumber > 0)
         {
             this->StdList[stuNumber].showInfo(1);
             char choose;
@@ -62,6 +62,7 @@ void Manager::changeStudent()
                 return;
             }
             this->StdList[stuNumber].setInfo(choose - '0' + 2);
+            cout << "修改完成" << endl;
         }
     }
     else if (choose == '2')
@@ -162,7 +163,7 @@ void Manager::deleteStudent()
                 cout << "错误学号: " << stuNumber << endl;
                 continue;
             }
-            else if (stuNumber > 0 && stuNumber <= 64)
+            else if (stuNumber > 0)
             {
                 this->StdList[stuNumber].showInfo();
                 cout << endl;

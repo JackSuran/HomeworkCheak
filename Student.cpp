@@ -36,46 +36,55 @@ void Student::setInfo(int choose)
     }
 }
 
-void Student::setNumber(int number){
+void Student::setNumber(int number)
+{
     this->m_Number = number;
 }
-void Student::setName(string name){
+void Student::setName(string name)
+{
     this->m_Name = name;
 }
-void Student::setSubmit(bool is_submit){
+void Student::setSubmit(bool is_submit)
+{
     this->m_Is_Submit = is_submit;
 }
-void Student::setCalled(bool is_call){
+void Student::setCalled(bool is_call)
+{
     this->m_Is_Called = is_call;
 }
 
-void Student::showInfo(int flag){
+void Student::showInfo(int flag)
+{
     cout << "学号：" << this->m_Number
-        << " 姓名：" << this->m_Name;
-    if(flag == 1){
-        cout<<" 是否提交："<<this->m_Is_Submit
-        <<" 是否提醒："<<this->m_Is_Called;
+         << " 姓名：" << this->m_Name;
+    if (flag == 1)
+    {
+        cout << " 是否提交：" << this->m_Is_Submit
+             << " 是否提醒：" << this->m_Is_Called;
     }
-    
 }
 
-int Student::getNumber(){
+int Student::getNumber()
+{
     return this->m_Number;
 }
 
-string Student::getName(){
+string Student::getName()
+{
     return this->m_Name;
 }
 
-bool Student::getSubmit(){
+bool Student::getSubmit()
+{
     return this->m_Is_Submit;
 }
 
-bool Student::getCall(){
+bool Student::getCall()
+{
     return this->m_Is_Called;
 }
 
-Student::Student():m_Number(0),m_Name("张三"),m_Is_Submit(false),m_Is_Called(false)
+Student::Student() : m_Number(0), m_Name("张三"), m_Is_Submit(false), m_Is_Called(false)
 {
 }
 
